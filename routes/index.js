@@ -4,7 +4,11 @@ const pkg = require("../package.json");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-	const respuesta = { name: pkg.name, version: pkg.version };
+	const respuesta = {
+		name: pkg.name,
+		version: pkg.version,
+		enviroment: process.env.ENV,
+	};
 	res.send(respuesta);
 });
 
