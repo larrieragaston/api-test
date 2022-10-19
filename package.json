@@ -15,10 +15,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/keepers/gizconnection-api.git"
+    "url": "git+https://github.com/larrieragaston/api-test.git"
   },
-  "author": "gastonlarriera <larriera.gaston@gmail.com>",
-  "homepage": "https://github.com/keepers/gizconnection-api#readme",
+  "author": "larrieragaston <larriera.gaston@gmail.com>",
+  "homepage": "https://github.com/larrieragaston/api-test#readme",
   "dependencies": {
     "config": "^3.3.7",
     "cookie-parser": "~1.4.4",
