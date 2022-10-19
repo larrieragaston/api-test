@@ -1,0 +1,53 @@
+{
+  "env": "development",
+  "program": "api",
+
+  "server": {
+    "url": "http://localhost:3000",
+    "maxResultsLimit": 1000
+  },
+
+  "auth": {
+    "token": {
+      "issuer": "BaseApi",
+      "algorithm": "RS256",
+      "appExpiresIn": "90d",
+      "dashboardExpiresIn": "1d",
+      "audience": ["app", "dashboard"]
+    },
+    "key": "base-api-local",
+    "passwordTtl": 94670856000,
+    "passwordResetTokenTtl": 15552000000,
+    "verificationTokenTtl": 15552000000
+  },
+
+  "rateLimit": {
+    "window": "1m",
+    "requests": 1000
+  },
+
+  "mongo": {
+    "db": "base-api",
+    "url": "mongodb://localhost/base-api"
+  },
+
+  "logger": {
+    "sentry": {
+      "dsn": ""
+    },
+    "console": {
+      "level": "debug",
+      "timestamp": true,
+      "handleExceptions": true,
+      "humanReadableUnhandledException": true,
+      "colorize": true
+    }
+  },
+
+  "aws": {
+    "accessKeyId": "",
+    "secretAccessKey": "",
+    "bucket": "base-api-local",
+    "region": "us-east-1"
+  }
+}

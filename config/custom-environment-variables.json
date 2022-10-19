@@ -1,0 +1,33 @@
+{
+	"auth": {
+		"key": "AUTH_KEY"
+	},
+
+	"mongo": {
+		"db": "MONGO_DB",
+		"url": "MONGO_URL",
+		"certificate": "MONGO_CERTIFICATE"
+	},
+
+	"logger": {
+		"sentry": {
+			"dsn": "LOGGER_SENTRY_DSN"
+		},
+		"console": {
+			"level": "LOGGER_CONSOLE_LEVEL"
+		}
+	},
+
+	"mailer": {
+		"smtp": {
+			"enable": "MAILER_SMTP_ENABLE",
+			"password": "MAILER_SMTP_PASSWORD"
+		}
+	},
+
+	"aws": {
+		"accessKeyId": "AWS_ACCESS_KEY_ID",
+		"secretAccessKey": "AWS_SECRET_ACCESS_KEY",
+		"region": "AWS_REGION"
+	}
+}

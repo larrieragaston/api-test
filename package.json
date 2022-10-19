@@ -1,20 +1,46 @@
 {
-	"name": "api-test",
-	"version": "0.0.0",
-	"private": true,
-	"scripts": {
-		"start": "node ./bin/www",
-		"dev": "nodemon ./bin/www"
-	},
-	"dependencies": {
-		"cookie-parser": "~1.4.4",
-		"debug": "~2.6.9",
-		"dotenv": "^16.0.3",
-		"express": "~4.16.1",
-		"mongoose": "^6.6.4",
-		"morgan": "~1.9.1"
-	},
-	"devDependencies": {
-		"nodemon": "^2.0.20"
-	}
+  "name": "api-test",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "./bin/baseApi",
+    "dev": "nodemon ./bin/baseApi",
+    "format": "prettier --write '**/*.{js,json,md}'",
+    "lint": "eslint . --ext .js",
+    "nomad": "nomad"
+  },
+  "pre-commit": [
+    "format",
+    "lint"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keepers/gizconnection-api.git"
+  },
+  "author": "gastonlarriera <larriera.gaston@gmail.com>",
+  "homepage": "https://github.com/keepers/gizconnection-api#readme",
+  "dependencies": {
+    "config": "^3.3.7",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^16.0.3",
+    "express": "~4.16.1",
+    "figlet": "^1.5.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.3.1",
+    "mongoose": "^6.6.4",
+    "mongoose-validator": "^2.1.0",
+    "morgan": "~1.9.1",
+    "nomad-cli": "^1.1.2",
+    "on-finished": "^2.4.1",
+    "require-all": "^2.2.0",
+    "to-camel-case": "^1.0.0",
+    "winston": "2.4.5",
+    "winston-child-logger": "0.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.25.0",
+    "nodemon": "^2.0.20",
+    "prettier": "2.7.1"
+  }
 }
