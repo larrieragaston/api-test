@@ -94,7 +94,7 @@ async function updateUser(req, res, next) {
       res.status(404).send('User not found')
     }
 
-    userToUpdate.isActive = user.isActive
+    userToUpdate.userName = user.userName
     await userToUpdate.save()
 
     res.send(userToUpdate)
