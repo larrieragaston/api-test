@@ -52,7 +52,7 @@ async function createUser(req, res, next) {
 
     const userCreated = await req.model('User').create({ ...user, role: role._id })
 
-    res.send(`User created :  ${userCreated.userName}`)
+    res.send(userCreated)
   } catch (err) {
     next(err)
   }
