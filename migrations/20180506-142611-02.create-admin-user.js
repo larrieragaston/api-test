@@ -9,7 +9,7 @@ exports.up = function up(db, done) {
   db.collection('users').insertOne(
     {
       _id: new ObjectId('000000000000000000000000'),
-      email: 'admin@baseapi.com',
+      userName: 'admin@baseapi.com',
       password: '$2a$10$J3Qa3YiZTxXBX7NsSXMWmeVfrnsK7GXyCQM8sQ0VpSgvULxA/DOgO', // Password1
       name: {
         firstName: 'Luke',
