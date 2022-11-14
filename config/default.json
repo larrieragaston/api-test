@@ -10,6 +10,7 @@
 
   "auth": {
     "token": {
+      "secret": "secret",
       "issuer": "BaseApi",
       "algorithm": "RS256",
       "appExpiresIn": "90d",

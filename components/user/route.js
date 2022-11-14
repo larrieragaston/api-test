@@ -1,12 +1,15 @@
 const { Router } = require('express')
-
 const router = new Router()
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
 
 router.get('/', getAllUsers)
 router.get('/:id', getUserById)
 router.post('/', createUser)
 router.put('/:id', updateUser)
 router.delete('/:id', deleteUser)
+
+router.post('/login', createUserToken)
 
 async function getAllUsers(req, res, next) {
   try {
@@ -50,7 +53,11 @@ async function createUser(req, res, next) {
       res.status(404).send('Role not found')
     }
 
-    const userCreated = await req.model('User').create({ ...user, role: role._id })
+    const passEncrypted = await bcrypt.hash(user.password, 10)
+
+    const userCreated = await req
+      .model('User')
+      .create({ ...user, password: passEncrypted, role: role._id })
 
     res.send(userCreated)
   } catch (err) {
@@ -98,6 +105,60 @@ async function updateUser(req, res, next) {
     await userToUpdate.save()
 
     res.send(userToUpdate)
+  } catch (err) {
+    next(err)
+  }
+}
+
+async function createUserToken(req, res, next) {
+  req.logger.info(`Creating user token`)
+  // try {
+  //   const passEncrypted = await bcrypt.hash('Admin1234', 10)
+  //   console.log(passEncrypted)
+  //   res.send({ pass: passEncrypted })
+  // } catch (err) {
+  //   next(err)
+  // }
+
+  if (!req.body.email) {
+    req.logger.verbose('Missing email parameter. Sending 404 to client')
+    return res.status(400).end()
+  }
+
+  if (!req.body.password) {
+    req.logger.info('Missing password parameter. Sending 404 to client')
+    return res.status(400).end()
+  }
+
+  try {
+    const user = await req.model('User').findOne({ userName: req.body.email }, '+password')
+
+    if (!user) {
+      req.logger.verbose('User not found. Sending 404 to client')
+      return res.status(404).end()
+    }
+
+    req.logger.verbose('Checking user password')
+    const result = await user.checkPassword(req.body.password)
+
+    delete user.password
+
+    if (!result.isOk) {
+      req.logger.verbose('User password is invalid. Sending 401 to client')
+      return res.status(401).end()
+    }
+
+    const payload = {
+      _id: user._id,
+      userName: user.userName,
+      role: user.role,
+    }
+
+    const token = jwt.sign(payload, req.config.auth.token.secret, {
+      expiresIn: req.config.auth.token.ttl,
+    })
+
+    res.status(201).send({ token: `Bearer ${token}`, user: payload })
   } catch (err) {
     next(err)
   }

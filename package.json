@@ -20,6 +20,7 @@
   "author": "larrieragaston <larriera.gaston@gmail.com>",
   "homepage": "https://github.com/larrieragaston/api-test#readme",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "config": "^3.3.7",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
